@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block body %}
+<style>
+    /* General Styles */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #f4f6f9;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    section.about {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        margin-top: 30px;
+    }
+
+    section.about h1 {
+        font-size: 2.8em;
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    section.about h2 {
+        font-size: 2em;
+        color: #343a40;
+        margin-top: 20px;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+
+    section.about p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: #666;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    /* List styles */
+    section.about ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
+
+    section.about ul li {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    section.about ul li strong {
+        color: #007bff;
+    }
+
+    section.about ul li::before {
+        content: "✔ ";
+        color: #007bff;
+        font-size: 1.2em;
+        margin-right: 10px;
+    }
+
+    /* Section Styling */
+    .highlight {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 1.3em;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+    }
+
+    .highlight:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        section.about {
+            padding: 20px;
+        }
+
+        section.about h1 {
+            font-size: 2.4em;
+        }
+
+        section.about h2 {
+            font-size: 1.6em;
+        }
+
+        section.about p {
+            font-size: 1em;
+        }
+
+        section.about ul li {
+            font-size: 1em;
+        }
+    }
+
+</style>
+
+<div class="container">
+    <section class="about">
+        <h1>About Us</h1>
+        <p>Welcome to <strong>TaskMaster</strong>, your go-to task management app designed to help individuals and teams stay organized, efficient, and on top of their goals. Our mission is to make task management simple, intuitive, and accessible for everyone—whether you're a freelancer, small business owner, or part of a large corporation.</p>
+
+        <h2>Our Mission</h2>
+        <p>At TaskMaster, we believe that the key to productivity lies in staying organized and focused. Our app provides a streamlined, easy-to-use platform for creating tasks, setting deadlines, and tracking progress. Whether you need to manage personal to-do lists or collaborate with teammates on complex projects, we’ve got you covered. Our mission is to empower users to accomplish more with less stress.</p>
+
+        <h2>Our Story</h2>
+        <p>TaskMaster was founded in 2025 by a team of productivity enthusiasts who were frustrated by the cluttered and complicated task management tools available at the time. We wanted a tool that was simple, effective, and intuitive—one that could help us stay organized without overwhelming us. After months of research, design, and testing, TaskMaster was born.</p>
+
+        <h2>What Makes Us Different</h2>
+        <p>While many task management tools focus on advanced features that are difficult to navigate, we prioritize simplicity and user-friendliness. Key features of TaskMaster include:</p>
+        <ul>
+            <li><strong>Task Creation & Prioritization:</strong> Easily create tasks, set due dates, and prioritize what matters most.</li>
+            <li><strong>Team Collaboration:</strong> Share tasks, assign responsibilities, and track progress in real time with your team.</li>
+            <li><strong>Customizable Workflows:</strong> Tailor the app to fit your personal or team's unique workflow.</li>
+            <li><strong>Cross-Platform Sync:</strong> Access your tasks and projects on any device, whether it’s your phone, tablet, or computer.</li>
+            <li><strong>Intuitive Interface:</strong> A clean and simple interface that makes task management a breeze.</li>
+        </ul>
+
+        <h2>Our Vision for the Future</h2>
+        <p>We’re always working on ways to improve TaskMaster. In the coming months, we’ll be adding new features to make it even more powerful, including advanced reporting tools, integrations with other apps, and enhanced team collaboration features. Our goal is to continue evolving TaskMaster into the best task management solution on the market.</p>
+
+        <h2>Join the TaskMaster Community</h2>
+        <p>We invite you to try TaskMaster today and see for yourself how easy it is to stay organized and achieve your goals. Whether you're managing daily tasks or large projects, we’re here to help you succeed. Join our growing community of users who are getting things done—one task at a time!</p>
+
+        <a href="/signup" class="highlight">Get Started with TaskMaster</a>
+    </section>
+</div>
+
+{% endblock body %}

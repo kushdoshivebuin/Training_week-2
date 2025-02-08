@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Signup{% endblock title %}
+{% block body %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .signup-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .signup-container h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    .signup-form {
+        margin-top: 20px;
+    }
+
+    .signup-form input[type="email"], 
+    .signup-form input[type="text"],
+    .signup-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .signup-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #28a745;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .signup-form input[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    .signup-form p {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .signup-form a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .signup-form a:hover {
+        color: #0056b3;
+    }
+</style>
+
+<div class="signup-container">
+    <h2>Sign Up</h2>
+    <form class="signup-form" id="signup-form" action="/signup" method="post" onsubmit="return validatePasswords()">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+        <input type="submit" value="Signup">
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alert {{ messages[0][0] }}">
+            {{ messages[0][1] }}
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+    {% endif %}
+{% endwith %}
+
+<script>
+    // Add event listeners to form fields to hide the flash message
+    const inputs = document.querySelectorAll('.signup-form input, .signup-form textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            const alertBox = document.querySelector('.alert');
+            if (alertBox) {
+                alertBox.style.display = 'none';  // Hide the alert when the user starts typing
+            }
+        });
+    });
+</script>
+{% endblock body %}

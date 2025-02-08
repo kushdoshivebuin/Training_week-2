@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - {{ username }}{% endblock title %}
+
+{% block body %}
+<style>
+    /* Dashboard Container */
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    /* Card Widget for Task Overview */
+    .card-widget {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        /* Make the cards clickable */
+        transition: transform 0.3s ease;
+    }
+
+    .card-widget:hover {
+        transform: scale(1.05);
+        /* Scale effect on hover */
+    }
+
+    .card-widget h3 {
+        margin-bottom: 10px;
+    }
+
+    .card-widget .icon {
+        font-size: 30px;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    /* Task Creation Form */
+    .task-creation-form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+    }
+
+    .task-creation-form input,
+    .task-creation-form select,
+    .task-creation-form button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .task-creation-form button {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .task-creation-form button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Task List Section */
+    .task-list {
+        margin-top: 30px;
+    }
+
+    .task-item {
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        border-radius: 6px;
+        padding: 15px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .task-item .task-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .task-item .task-status {
+        font-size: 14px;
+        color: #007bff;
+    }
+</style>
+
+<!-- Dashboard Content -->
+<div class="content">
+    <!-- Welcome Section -->
+    <div class="header">
+        <div class="user-info">
+            <span>Welcome back, {{ username }}!</span>
+        </div>
+    </div>
+
+    <!-- Dashboard Overview -->
+    <div class="dashboard-container">
+        <!-- Tasks Overview Card -->
+        <div class="card-widget" onclick="window.location.href='tasks?status=All'">
+            <div class="icon">
+                <i class="fas fa-tasks"></i>
+            </div>
+            <h3>Total Tasks</h3>
+            <p>{{ total_tasks }}</p>
+        </div>
+
+        <!-- Completed Tasks Card -->
+        <div class="card-widget" onclick="window.location.href='tasks?status=Completed'">
+
+            <div class="icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Completed Tasks</h3>
+            <p>{{ Completed_tasks }}</p>
+        </div>
+
+        <!-- Pending Tasks Card -->
+        <div class="card-widget" onclick="window.location.href='tasks?status=Pending'">
+            <div class="icon">
+                <i class="fas fa-hourglass-half"></i>
+            </div>
+            <h3>Pending Tasks</h3>
+            <p>{{ Pending_tasks }}</p>
+        </div>
+    </div>
+
+    <!-- Task Creation Form -->
+    <div class="task-creation-form">
+        <h4>Create a New Task</h4>
+        <form action="/create_task" method="POST" enctype="multipart/form-data">
+            <input type="text" name="task_title" placeholder="Task Title" required>
+            <input type="text" name="task_description" placeholder="Task Description" required>
+            <select name="task_priority" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <select name="task_status" required>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+            </select>
+
+            <input type="file" name="file_upload" accept="image/* , application/pdf*" />
+
+            <button type="submit">Create Task</button>
+        </form>        
+    </div>
+</div>
+
+{% endblock body %}

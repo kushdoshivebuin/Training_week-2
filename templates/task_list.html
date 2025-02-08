@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block title %}Task List{% endblock title %}
+
+{% block body %}
+<style>
+    /* Table Container */
+    .task-list-container {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Table Styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f7f7f7;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Task Status Colors */
+    .status-pending {
+        color: #ff9800;
+    }
+
+    .status-completed {
+        color: #4caf50;
+    }
+
+    .status-in-progress {
+        color: #2196f3;
+    }
+
+    .task-item-row:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Priority Styling */
+    .priority-high {
+        color: #ff6347;
+        font-weight: bold;
+    }
+
+    .priority-medium {
+        color: #ffa500;
+        font-weight: bold;
+    }
+
+    .priority-low {
+        color: #4caf50;
+        font-weight: bold;
+    }
+
+    /* No Tasks Message */
+    .no-tasks-message {
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+    }
+
+    .toggle-status-btn {
+        padding: 6px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .toggle-status-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Dashboard Button Styles */
+    .dashboard-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        display: inline-block;
+        margin-bottom: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .dashboard-button:hover {
+        background-color: #0056b3;
+    }
+
+    .header {
+        display: flex;
+        justify-content: flex-end; /* Aligns the content (button) to the right */
+        margin-bottom: 20px;
+    }
+
+    /* Eye Icon Styles */
+    .eye-icon {
+        font-size: 20px;
+        cursor: pointer;
+        color: #007bff;
+    }
+</style>
+
+<div class="task-list-container">
+    <h3>{{ status.capitalize() }} Tasks</h3>
+    <!-- Dashboard Button -->
+    <div class="header">
+        <a href="{{ url_for('dashboard_page') }}" class="dashboard-button">Go to Dashboard</a>
+    </div>
+
+    {% if tasks %}
+    <table>
+        <thead>
+            <tr>
+                <th>Task Title</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Action</th>
+                <th>Remove</th>
+                <th>Created At</th>
+                <th>File</th> <!-- New column for file -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr class="task-item-row">
+                <td>{{ task.task_title }}</td>
+                <td>{{ task.task_description }}</td>
+                <td class="{% if task.task_priority <= 3 %}priority-high{% elif task.task_priority == 4 %}priority-medium{% else %}priority-low{% endif %}">
+                    {{ task.task_priority }}
+                </td>
+                <td class="status-{{ task.task_status|lower }}">{{ task.task_status }}</td>
+                <td>
+                    <form action="{{ url_for('toggle_task_status', task_id=task.sr_no) }}" method="POST">
+                        <button type="submit" class="toggle-status-btn">
+                            {% if task.task_status == 'Pending' %}
+                            Mark as Completed
+                            {% else %}
+                            Mark as Pending
+                            {% endif %}
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('delete_task', task_id=task.sr_no) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="toggle-status-btn" style="background-color: #dc3545; border-color: #dc3545;">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    {{ task.task_created_at }}
+                </td>
+                <td>
+                    {% if task.task_file %}
+                        <!-- Eye Icon to View File -->
+                        <a href="{{ task.task_file }}" target="_blank">
+                            <span class="eye-icon">&#128065;</span> {{task.task_file}}
+                        </a>
+                    {% else %}
+                        No File
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-tasks-message">No tasks found for this status.</p>
+    {% endif %}
+</div>
+{% endblock %}

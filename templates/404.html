@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}404 - Page not found{% endblock title %}
+
+{% block body %}
+
+<style>
+    /* Centered container */
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* Error message container styling */
+    .error-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px 50px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        animation: fadeIn 1s ease-out;
+    }
+
+    /* Style for the large 404 number */
+    .error-title {
+        font-size: 100px;
+        font-weight: bold;
+        color: #e74c3c;
+        margin: 0;
+        letter-spacing: 5px;
+        animation: bounce 1.5s infinite alternate;
+    }
+
+    /* Error message styling */
+    .error-message {
+        font-size: 24px;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    /* Description below the error message */
+    .error-description {
+        font-size: 18px;
+        color: #888;
+        margin: 20px 0;
+    }
+
+    /* Home button styling */
+    .home-button {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        border: 2px solid #007bff;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    .home-button:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        cursor: pointer;
+    }
+
+    /* Animation for fading in */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Bounce animation for the 404 number */
+    @keyframes bounce {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+</style>
+<br><br><br><br>
+<div class="content">
+    <div class="error-container">
+        <h1 class="error-title">404</h1>
+        <h2 class="error-message">Oops! The page you're looking for does not exist.</h2>
+        <p class="error-description">It seems like the page has been moved, deleted, or never existed.</p>
+        <a href="/" class="home-button">Go Back to Home</a>
+    </div>
+</div>
+{% endblock body %}

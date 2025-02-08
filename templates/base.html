@@ -1,1 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Master | {% block title %}{% endblock title %}</title>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/static/images/todo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(248, 249, 250, 0.8);
+            padding: 10px 20px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #212529;
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .login-signup {
+            display: flex;
+            gap: 10px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .alert.success {background-color: #4CAF50;}
+        .alert.info {background-color: #2196F3;}
+        .alert.warning {background-color: #ff9800;}
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <img src="https://th.bing.com/th/id/OIP.3GobN-WMWfKuzZovM7KKkAAAAA?w=285&h=120&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Task Management Logo" style="height: 50px; width: auto">
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact Us</a>
+        </div>
+        
+        {% block nav %}
+        {% if session.get('username') %}
+        <!-- If user is logged in, show logout button -->
+        <div class="login-signup">
+            <a href="/logout">Logout</a>
+        </div>
+        {% else %}
+        <!-- If user is not logged in, show login and signup buttons -->
+        <div class="login-signup">
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+        </div>
+        {% endif %}
+        {% endblock nav %}
+    </nav>
+
+    {% block body %}{% endblock body %}
+
+    <footer>
+        <p>&copy; 2025 Task Master. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
